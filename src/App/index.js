@@ -4,6 +4,7 @@ import AppLayout from './AppLayout';
 import AppBar from './AppBar';
 import {AppProvider} from './AppProvider';
 import Settings from '../Settings';
+import Content from '../Shared/Content';
 
 class App extends Component {
   render() {
@@ -11,7 +12,9 @@ class App extends Component {
       <AppLayout>
         <AppProvider>
           <AppBar/>
-          <Settings />
+          <Content>
+            <Settings />
+          </Content>
         </AppProvider>
       </AppLayout>
     );
