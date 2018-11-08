@@ -109,10 +109,11 @@ export class AppProvider extends React.Component {
       firstVisit: false,
       page: 'dashboard',
       currentFavorite,
-      prices: null
+      prices: null,
+      historical: null
     }, () => {
         this.fetchPrices();
-        this.historical();
+        this.fetchHistorical();
     });
     localStorage.setItem('cryptoDash', JSON.stringify({
       favorites: this.state.favorites,
