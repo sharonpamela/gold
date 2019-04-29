@@ -25,7 +25,9 @@ export class AppProvider extends React.Component {
       confirmFavorites: this.confirmFavorites,
       setCurrentFavorite: this.setCurrentFavorite,
       setFilteredCoins: this.setFilteredCoins,
-      changeChartSelect: this.changeChartSelect
+      changeChartSelect: this.changeChartSelect,
+      buyButton: this.buyButton,
+      sellButton: this.sellButton
     }
   }
 
@@ -36,7 +38,7 @@ export class AppProvider extends React.Component {
   }
 
   fetchCoins = async () => {
-    let coinList = (await cc.coinList()).Data; 
+    let coinList = (await cc.coinList()).Data;
     this.setState({ coinList });
   }
 
@@ -134,41 +136,66 @@ export class AppProvider extends React.Component {
     }));
   }
 
-  setCurrentFavorite = (sym) => {
-    this.setState({
-      currentFavorite: sym,
-      historical: null
-    }, this.fetchHistorical);
+  buyButton =  (currentFavorite) => {
+    console.log("buy button hit");
+    this.state.prices.forEach( async price => {
+      if (price[this.state.currentFavorite]) {
+        console.log(price[this.state.currentFavorite].USD.PRICE);
+        await API.buyButton({
+          user_id: 33,
+          price: price[this.state.currentFavorite].USD.PRICE
+        })
+      }
+    })
+  };
 
-    localStorage.setItem('cryptoDash', JSON.stringify({
-      ...JSON.parse(localStorage.getItem('cryptoDash')),
-      currentFavorite: sym
-    }))
+
+
+sellButton = (currentFavorite) => {
+  console.log("sell button hit");
+  this.state.prices.forEach(price => {
+    if (price[this.state.currentFavorite])
+      console.log(price[this.state.currentFavorite].USD.PRICE);
+  })
+  // console.log(this.state.historical);
+
+}
+
+setCurrentFavorite = (sym) => {
+  this.setState({
+    currentFavorite: sym,
+    historical: null
+  }, this.fetchHistorical);
+
+  localStorage.setItem('cryptoDash', JSON.stringify({
+    ...JSON.parse(localStorage.getItem('cryptoDash')),
+    currentFavorite: sym
+  }))
+}
+
+savedSettings() {
+  let cryptoDashData = JSON.parse(localStorage.getItem('cryptoDash'));
+  if (!cryptoDashData) {
+    return { page: 'settings', firstVisit: true }
   }
+  let { favorites, currentFavorite } = cryptoDashData;
+  return { favorites, currentFavorite };
+}
 
-  savedSettings() {
-    let cryptoDashData = JSON.parse(localStorage.getItem('cryptoDash'));
-    if (!cryptoDashData) {
-      return { page: 'settings', firstVisit: true }
-    }
-    let { favorites, currentFavorite } = cryptoDashData;
-    return { favorites, currentFavorite };
-  }
+setPage = page => this.setState({ page })
 
-  setPage = page => this.setState({ page })
+setFilteredCoins = (filteredCoins) => this.setState({ filteredCoins })
 
-  setFilteredCoins = (filteredCoins) => this.setState({ filteredCoins })
+changeChartSelect = (value) => {
+  this.setState({ timeInterval: value, historical: null }, this.fetchHistorical);
+}
 
-  changeChartSelect = (value) => {
-    this.setState({ timeInterval: value, historical: null }, this.fetchHistorical);
-  }
-
-  render() {
-    return (
-      <AppContext.Provider value={this.state}>
-        {this.props.children}
-      </AppContext.Provider>
-    )
-  }
+render() {
+  return (
+    <AppContext.Provider value={this.state}>
+      {this.props.children}
+    </AppContext.Provider>
+  )
+}
 
 }

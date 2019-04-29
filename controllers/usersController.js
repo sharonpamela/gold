@@ -40,5 +40,15 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+
+  buyButton: function(req, res){
+    // this is being hit we just need to send current price to db
+    console.log(req);
+    db.Users
+      .findById(req.params.id)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }
+
 };
