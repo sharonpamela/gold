@@ -7,6 +7,9 @@ router.route("/")
   .get(usersController.findAll)
   .post(usersController.create);
 
+router.route("/buy")
+  .post(usersController.buyButton);
+
 // "/api/currentUser"
 router.get('/currentUser', (req, res) => {
   console.log(req.user);
