@@ -2,6 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 
+require('./models/users');
+require('./services/passport');
+
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/gold", function(error){
     if(error) console.log(error);
