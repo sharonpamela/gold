@@ -1,10 +1,13 @@
 const router = require("express").Router();
 const usersController = require("../../controllers/usersController");
 
-// Matches with "/users"
+// Matches with "/api/users"
 router.route("/")
   .get(usersController.findAll)
+  // .post(usersController.create);
   .post(usersController.create);
+
+  console.log("Matched route for users...")
 
 // Matches with "/api/books/:id"
 // router

@@ -9,8 +9,6 @@ const CoinImage = styled.img`
     display: block; 
   `}
 `
-
-
 export default function ({coin, spotlight}) {
   return <CoinImage
     spotlight={spotlight}

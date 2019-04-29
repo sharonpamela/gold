@@ -6,21 +6,25 @@ import {AppProvider} from './AppProvider';
 import Settings from '../Settings';
 import Dashboard from '../Dashboard';
 import Content from '../Shared/Content';
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
   render() {
     return (
-      <AppLayout>
-        <AppProvider>
-          <AppBar/>
-          <Content>
-            <Settings />
-            <Dashboard />
-          </Content>
-        </AppProvider>
-      </AppLayout>
+     
+        <AppLayout>
+          <AppProvider>
+            <AppBar/>
+            <Content>
+              
+                <Settings />
+                <Dashboard />
+              
+            </Content>
+          </AppProvider>
+        </AppLayout>
+      
     );
   }
 }
-
 export default App;
