@@ -6,6 +6,24 @@ const db = require('./../models');
 const mongoose = require('mongoose');
 const User = mongoose.model('Users');
 
+
+// this sets an identifying token that says you are without a doubt
+// the user that logged in
+passport.serializeUser( (user, done) => {
+  // this sets the user.id as the cookie
+  done(null, user.id);
+});
+
+// takes the id that we stuffed in the cookie from serialize and turn it back into a user model
+passport.deserializeUser( async (id, done) => {
+  const user = await db.Users.findById(id);
+  done(null, user);
+});
+// Tells passport to use a google strategy and what credentials
+// and function to run when the strategy is used
+
+// The second parameter is the function that fires every time the user gets redirected
+// back to our app after they sign in
 passport.use(
   new GoogleStrategy({
     clientID: keys.googleClientID,
@@ -27,21 +45,5 @@ passport.use(
   })
 );
 
-// this sets an identifying token that says you are without a doubt
-// the user that logged in
-passport.serializeUser( (user, done) => {
-  // this sets the user.id as the cookie
-  done(null, user.id);
-});
 
-// takes the id that we stuffed in the cookie from serialize and turn it back into a user model
-passport.deserializeUser( async (id, done) => {
-  const user = await db.User.findById(id);
-  done(null, user);
-});
 
-// Tells passport to use a google strategy and what credentials
-// and function to run when the strategy is used
-
-// The second parameter is the function that fires every time the user gets redirected
-// back to our app after they sign in
