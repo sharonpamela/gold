@@ -1,0 +1,6 @@
+// Production keys are here
+module.exports = {
+    googleClientID: process.env.GOOGLE_CLIENT_ID,
+    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    cookieKey: process.env.GOOGLE_CLIENT_COOKIE_KEY
+};
