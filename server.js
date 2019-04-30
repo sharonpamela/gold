@@ -34,12 +34,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/gold", function
     if(error) console.log(error);
     console.log("MONGO connection successful");
   });
-
-
-
-
+  
 // Add routes, both API and view
-
 require('./services/authRoutes')(app);
 app.use('/', routes);
 
