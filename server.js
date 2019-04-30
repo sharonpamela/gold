@@ -35,12 +35,8 @@ mongoose.connect(keys.mongoURI, function(error){
     if(error) console.log(error);
     console.log("MONGO connection successful");
   });
-
-
-
-
+  
 // Add routes, both API and view
-
 require('./services/authRoutes')(app);
 app.use('/', routes);
 

@@ -18,5 +18,10 @@ export default {
   // Deletes the book with the given id
   deleteUser: function (id) {
     return axios.delete("/api/users/" + id);
+  },
+
+  buyButton: function(userData){
+    console.log("hit buy button inside API")
+    return axios.post("/api/buy", userData)
   }
 };

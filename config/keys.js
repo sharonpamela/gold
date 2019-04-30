@@ -1,7 +1,5 @@
-// Production keys are here
-module.exports = {
-    googleClientID: process.env.GOOGLE_CLIENT_ID,
-    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    cookieKey: process.env.GOOGLE_CLIENT_COOKIE_KEY,
-    mongoURI: process.env.MONGO_URI
-};
+if (process.env.NODE_ENV === 'production') {
+    module.exports = require('./prod');
+} else {
+    module.exports = require('./dev');
+}
