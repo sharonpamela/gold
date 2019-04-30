@@ -6,6 +6,7 @@ module.exports = (app) => {
   }));
 
   app.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
-    res.redirect('/');
+    console.log("Redirecting to home page...");
+    res.redirect('http://localhost:3000/');
   });
 }

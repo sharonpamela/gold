@@ -13,8 +13,7 @@ require('./services/passport');
 const app = express();
 
 // Define middleware here
-require("./services/passport")
-
+require("./services/passport");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -34,7 +33,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/gold", function
     if(error) console.log(error);
     console.log("MONGO connection successful");
   });
-  
+
 // Add routes, both API and view
 require('./services/authRoutes')(app);
 app.use('/', routes);
@@ -48,5 +47,3 @@ if (process.env.NODE_ENV === "production") {
 app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
-
-
