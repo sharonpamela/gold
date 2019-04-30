@@ -2,26 +2,26 @@ const router = require("express").Router();
 const usersController = require("../../controllers/usersController");
 // we're inside /api
 
-// // "/api/users"
-// router.route('/')
-//   .get(usersController.findAll)
-//   .post(usersController.create);
+// "/api/users"
+router.route('/')
+  .get(usersController.findAll)
+  .post(usersController.create);
 
-// // "/api/buy"
-// router.route("/buy")
-//   .post(usersController.buyButton);
+// "/api/buy"
+router.route("/buy")
+  .post(usersController.buyButton);
 
-// // "/api/currentUser"
-// router.get('/currentUser', (req, res) => {
-//   console.log(req.user);
-//   res.send(req.user);
-// });
+// "/api/currentUser"
+router.get('/currentUser', (req, res) => {
+  console.log(req.user);
+  res.send(req.user);
+});
 
-// // "/api/logout"
-// router.get('/logout', (req, res) => {
-//   req.logout();
-//   res.redirect('/');
-// });
+// "/api/logout"
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
 
 // Matches with "/api/books/:id"
 // router

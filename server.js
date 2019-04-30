@@ -4,6 +4,7 @@ const routes = require("./routes");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 const keys = require("./config/keys");
+const path = require("path");
 
 const PORT = process.env.PORT || 3001;
 
@@ -46,7 +47,10 @@ app.use('/', routes);
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  // app.use(express.static("client/build"));
+  app.use(express.static(path.join(__dirname, '../client/build')));
+} else {
+  app.use(express.static(path.join(__dirname, '../client/public')));
 }
 
 // Start the API server
