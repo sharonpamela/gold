@@ -29,14 +29,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Connect to the Mongo DB
-if (process.env.NODE_ENV === "production") {
-  mongoose.connect(keys.mongoURI, function (error) {
-    if (error) console.log(error);
-    console.log("MONGO connection successful");
-  });
-} else {
-  mongoose.connect("mongodb://localhost/gold")
-}
+// if (process.env.NODE_ENV === "production") {
+//   mongoose.connect(keys.mongoURI, function (error) {
+//     if (error) console.log(error);
+//     console.log("MONGO connection successful");
+//   });
+// } else {
+  // mongoose.connect("mongodb://localhost/gold")
+  mongoose.connect('mongodb://heroku_7zmcq9tr:sn82m09b8k7ps4fcen13smuq1b@ds149616.mlab.com:49616/heroku_7zmcq9tr');
+// }
 
 // Add routes, both API and view
 require('./services/authRoutes')(app);
