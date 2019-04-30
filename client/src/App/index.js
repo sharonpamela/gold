@@ -14,12 +14,12 @@ class App extends Component {
         <AppLayout>
           <AppProvider>
             <AppBar/>
-            <Content>
+            {/* <Content>
               
                 <Settings />
                 <Dashboard />
               
-            </Content>
+            </Content> */}
           </AppProvider>
         </AppLayout>
       
