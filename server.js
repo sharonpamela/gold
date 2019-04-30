@@ -30,7 +30,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/gold", function(error){
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/gold", function(error){
+mongoose.connect(keys.mongoURI, function(error){
     if(error) console.log(error);
     console.log("MONGO connection successful");
   });
