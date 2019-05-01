@@ -8,7 +8,9 @@ router.route("/")
   .post(usersController.create);
 
 router.route("/buy")
-  .post(usersController.buyButton);
+.get(usersController.fetchBalance)  
+.post(usersController.buyButton);
+
 
 // "/api/currentUser"
 router.get('/currentUser', (req, res) => {

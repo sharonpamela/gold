@@ -42,11 +42,19 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+fetchBalance: function(req, res){
+  db.Users
+    .find(req.query)
+    .then(console.log(req.query, "req query"))
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err))
+},
+
   buyButton: function(req, res){
     // this is being hit we just need to send current price to db
-    console.log(req);
+    console.log(req.body);
     db.Users
-      .findById(req.params.id)
+      .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }

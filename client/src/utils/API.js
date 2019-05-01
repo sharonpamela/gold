@@ -19,7 +19,10 @@ export default {
   deleteUser: function (id) {
     return axios.delete("/api/users/" + id);
   },
-
+  fetchBalance: function(){
+    console.log("fetch balance in API.js")
+    return axios.get("/api/buy")
+  },
   buyButton: function(userData){
     console.log("hit buy button inside API")
     return axios.post("/api/buy", userData)
