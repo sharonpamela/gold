@@ -136,14 +136,26 @@ export class AppProvider extends React.Component {
     }));
   }
 
+  fetchBalance = () => {
+    API.fetchBalance()
+   // .then(console.log(this.setState({balance: res.data})))
+    .catch(err => console.log(err));
+  }
+
+  
+
   buyButton =  (currentFavorite) => {
     console.log("buy button hit");
+    //this.fetchBalance();
+    // console.log(this.state.currentFavorite);
+
     this.state.prices.forEach( async price => {
       if (price[this.state.currentFavorite]) {
         console.log(price[this.state.currentFavorite].USD.PRICE);
         await API.buyButton({
           user_id: 33,
-          price: price[this.state.currentFavorite].USD.PRICE
+          price: price[this.state.currentFavorite].USD.PRICE,
+          coin: this.state.currentFavorite
         })
       }
     })

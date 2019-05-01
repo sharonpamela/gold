@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const usersSchema = new Schema({
-  googleId: String
+ // googleId: String,
+  user_id: Number,
+  price: Number,
+  coin: String
   
 });
 
