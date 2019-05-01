@@ -3,10 +3,11 @@ const usersController = require("../../controllers/usersController");
 // we're inside /api
 
 // "/api/users"
-router.route("/")
+router.route('/')
   .get(usersController.findAll)
   .post(usersController.create);
 
+// "/api/buy"
 router.route("/buy")
 .get(usersController.fetchBalance)  
 .post(usersController.buyButton);
