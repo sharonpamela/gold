@@ -1,6 +1,6 @@
 import React from 'react';
-import styled, {css} from 'styled-components';
-import {AppContext} from "./AppProvider";
+import styled, { css } from 'styled-components';
+import { AppContext } from "./AppProvider";
 
 const Logo = styled.div`
   font-size: 1.5em; 
@@ -9,7 +9,7 @@ const Logo = styled.div`
 const Bar = styled.div`
   display: grid; 
   margin-bottom: 40px; 
-  grid-template-columns: 180px auto 100px 100px; 
+  grid-template-columns: 180px auto 100px 100px 100px; 
 `
 
 const ControlButtonElem = styled.div`
@@ -22,33 +22,38 @@ const ControlButtonElem = styled.div`
   `}
 `
 
-function toProperCase(lower){
+function toProperCase(lower) {
   return lower.charAt(0).toUpperCase() + lower.substr(1);
 }
 
-function ControlButton({name}){
+function ControlButton({ name }) {
   return (
     <AppContext.Consumer>
-      {({firstVisit, page, setPage}) => (
+      {({ firstVisit, page, loggedOut, setPage }) => (
         <ControlButtonElem
           active={page === name}
-          onClick={()=> setPage(name)}
-          hidden={firstVisit && name === 'dashboard'}
+          onClick={() => setPage(name)}
+          hidden={
+            (firstVisit && name === 'dashboard') ||
+            (loggedOut && name === 'dashboard') ||
+            (loggedOut && name === 'settings')}
         >
           {toProperCase(name)}
         </ControlButtonElem>
-        )}
+      )}
     </AppContext.Consumer>
   )
 }
 
-export default function(){
+export default function () {
+
   return (
     <Bar>
-      <Logo> CryptoDash </Logo>
-      <div/>
-      <ControlButton active name="dashboard"/>
-      <ControlButton name="settings"/>
+      <Logo> Gold </Logo>
+      <div />
+      <ControlButton name="Login with Google" />
+      <ControlButton active name="dashboard" />
+      <ControlButton name="settings" />
     </Bar>
   );
 }

@@ -5,6 +5,7 @@ import {AppProvider} from './AppProvider';
 import Settings from '../Settings';
 import Dashboard from '../Dashboard';
 import Content from '../Shared/Content';
+import Landing from '../Landing';
 // import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
@@ -14,12 +15,11 @@ class App extends Component {
         <AppLayout>
           <AppProvider>
             <AppBar/>
-            {/* <Content>
-              
+            <Content>
                 <Settings />
                 <Dashboard />
-              
-            </Content> */}
+                <Landing />
+            </Content>
           </AppProvider>
         </AppLayout>
       

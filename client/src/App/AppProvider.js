@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import moment from 'moment';
 import API from "../utils/API";
+const axios = require("axios");
 
 const cc = require('cryptocompare');
 
@@ -14,11 +15,13 @@ export class AppProvider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 'dashboard',
+      // page: 'dashboard',
+      page: 'landing',
+      loggedOut: this.isLoggedOut,
       favorites: ['BTC', 'ETH', 'XMR', 'DOGE'],
       timeInterval: 'months',
       ...this.savedSettings(), // when called will spread results over prev props
-      setPage: this.setPage, // this determines which page content to display (settings or dash)
+      setPage: this.setPage, // this determines which page content to display (landing / settings / dash)
       addCoin: this.addCoin,
       removeCoin: this.removeCoin,
       isInFavorites: this.isInFavorites,
@@ -48,6 +51,17 @@ export class AppProvider extends React.Component {
     this.setState({ prices });
   }
 
+  isLoggedOut = async () => {
+    // if this route returns false, there is no user logged in
+    // true means there is a user and null means it's inbetween
+    try {
+        const res = await axios.get('/api/current_user');
+        // this.setState({ prices });
+        console.log(res);
+    } catch (e) {
+        console.log("fetching user logged in status", e);
+    }
+  }
   fetchHistorical = async () => {
     if (this.state.firstVisit) return;
     let results = await this.historical();
@@ -204,6 +218,8 @@ changeChartSelect = (value) => {
 
 render() {
   return (
+    // this means the state defined in this app is accessible 
+    // via any component as long as it is wrapped in AppContext.consumer tags
     <AppContext.Provider value={this.state}>
       {this.props.children}
     </AppContext.Provider>
